@@ -38,7 +38,7 @@ public abstract class ImplementacionControladorBase <E extends EntidadBase, S ex
         }
     }
 
-    @PostMapping("")
+    /*@PostMapping("")
     public ResponseEntity<?> save(@RequestBody E entity) {
 
         try {
@@ -46,7 +46,7 @@ public abstract class ImplementacionControladorBase <E extends EntidadBase, S ex
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"" + e.getMessage() + "\"}");
         }
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
