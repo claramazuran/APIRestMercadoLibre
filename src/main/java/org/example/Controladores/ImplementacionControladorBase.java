@@ -38,6 +38,15 @@ public abstract class ImplementacionControladorBase <E extends EntidadBase, S ex
         }
     }
 
+    /*@GetMapping("")
+    public ResponseEntity<?> getEstadisticas (){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body("{\"error\":\"" + e.getMessage() + "\"}")
+        }catch (Exception e) {
+            return
+        }
+
+    }*/
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
         try {
