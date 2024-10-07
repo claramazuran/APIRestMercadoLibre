@@ -20,7 +20,7 @@ FROM openjdk:17-alpine
 EXPOSE 9000
 
 # Copiar el archivo JAR desde la etapa de construcción
-COPY --from=build ./build/libs/demo-app-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build ./build/libs/APIRestMercadoLibre-0.0.1-SNAPSHOT.jar ./app.jar
 
 # Definir el comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
