@@ -21,12 +21,8 @@ public class ControladorHumano extends ImplementacionControladorBase <Humano, Im
         if (esMutante) {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"Es mutante\"}");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(servicio.save(entity));
         }
     }
 
-    /*@PostMapping("/mutants")
-    public ResponseEntity<String> esMutanteOno(@RequestBody Humano entity) {
-
-    }*/
 }

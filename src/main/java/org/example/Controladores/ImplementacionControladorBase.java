@@ -38,16 +38,6 @@ public abstract class ImplementacionControladorBase <E extends EntidadBase, S ex
         }
     }
 
-    /*
-    public ResponseEntity<?> save(@RequestBody E entity) {
-
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(servicio.save(entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"" + e.getMessage() + "\"}");
-        }
-    }*/
-
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
         try {
