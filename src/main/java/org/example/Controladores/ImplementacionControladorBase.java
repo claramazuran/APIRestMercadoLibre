@@ -38,7 +38,7 @@ public abstract class ImplementacionControladorBase <E extends EntidadBase, S ex
         }
     }
 
-    /*@PostMapping("")
+    /*
     public ResponseEntity<?> save(@RequestBody E entity) {
 
         try {

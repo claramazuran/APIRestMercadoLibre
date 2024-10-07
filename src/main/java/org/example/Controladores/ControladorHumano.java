@@ -15,7 +15,7 @@ public class ControladorHumano extends ImplementacionControladorBase <Humano, Im
 //    public ResponseEntity<?> getAllMutants();
 //    public ResponseEntity<?>  getAllNoMutants();
 
-    @Override
+    @PostMapping("/mutants")
     public ResponseEntity<?> save(@RequestBody Humano entity) {
         boolean esMutante = servicio.mutanteOno(entity);
         if (esMutante) {
