@@ -24,5 +24,21 @@ public class ControladorHumano extends ImplementacionControladorBase <Humano, Im
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(servicio.save(entity));
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Humano entity) {
+        try {
+            boolean esMutante = servicio.mutanteOno(entity);
+
+            if (esMutante) {
+                return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, entity));
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(servicio.update(id, entity));
+            }
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
 
 }

@@ -47,14 +47,6 @@ public abstract class ImplementacionControladorBase <E extends EntidadBase, S ex
         }
 
     }*/
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("{\"error\":\"" + e.getMessage() + "\"}");
-        }
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
