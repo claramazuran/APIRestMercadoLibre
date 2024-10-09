@@ -20,7 +20,7 @@ public class Estadistica extends EntidadBase{
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEstadistica;
-    private double cantidadHumanos;
-    private double cantidadMutantes;
+    private long cantidadHumanos;
+    private long cantidadMutantes;
     private double ratio;
 }

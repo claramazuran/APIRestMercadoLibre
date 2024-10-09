@@ -43,6 +43,7 @@ public class ImplementacionServicioHumano extends ImplementacionServicioBase <Hu
                 .cantidadMutantes(cantidadMutantes)
                 .ratio(ratio)
                 .build();
+        repositorioEstadistica.save(estadistica);
 
         return estadistica;
     }
