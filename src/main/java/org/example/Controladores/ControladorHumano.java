@@ -1,10 +1,7 @@
 package org.example.Controladores;
 
 import org.example.Entidades.Humano;
-import org.example.Servicios.ImplementacionServicioBase;
-import org.example.Servicios.ImplementacionServicioEstadistica;
 import org.example.Servicios.ImplementacionServicioHumano;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

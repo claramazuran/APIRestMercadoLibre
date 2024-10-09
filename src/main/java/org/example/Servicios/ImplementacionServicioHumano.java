@@ -31,11 +31,11 @@ public class ImplementacionServicioHumano extends ImplementacionServicioBase <Hu
 
     @Override
     public Estadistica obtenerEstadistica() {
-        double cantidadHumanos = repositorioEstadistica.contarHumanos();
-        double cantidadMutantes = repositorioEstadistica.contarMutantes();
+        long cantidadHumanos = repositorioEstadistica.contarHumanos();
+        long cantidadMutantes = repositorioEstadistica.contarMutantes();
 
         double ratio = (cantidadHumanos + cantidadMutantes) > 0
-                ? cantidadMutantes / (cantidadHumanos + cantidadMutantes)
+                ? (double) cantidadMutantes / (cantidadHumanos + cantidadMutantes)
                 : 0;
         Estadistica estadistica = Estadistica.builder()
                 .fechaEstadistica(new Date())//asigna la fecha actual
