@@ -2,7 +2,9 @@ package org.example.Controladores;
 
 import org.example.Entidades.Humano;
 import org.example.Servicios.ImplementacionServicioBase;
+import org.example.Servicios.ImplementacionServicioEstadistica;
 import org.example.Servicios.ImplementacionServicioHumano;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/mutants")//a travez de esta uri accedemos a los metodos de entity
 
 public class ControladorHumano extends ImplementacionControladorBase <Humano, ImplementacionServicioHumano> {
-//    public ResponseEntity<?> getAllMutants();
-//    public ResponseEntity<?>  getAllNoMutants();
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Humano entity) {
@@ -37,6 +37,15 @@ public class ControladorHumano extends ImplementacionControladorBase <Humano, Im
 
         } catch (Exception e) {
 
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<?> realizarEstadistica() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.obtenerEstadistica());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\":\"" + e.getMessage() + "\"}");
         }
     }
