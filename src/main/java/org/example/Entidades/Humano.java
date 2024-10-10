@@ -18,7 +18,7 @@ import java.util.List;
 public class Humano extends EntidadBase{
 
     private List<String> dna = new ArrayList<String>();
-    private boolean esMutante = esMutante(dna);
+    private boolean esMutante;
 
 /*METODOS*/
 
