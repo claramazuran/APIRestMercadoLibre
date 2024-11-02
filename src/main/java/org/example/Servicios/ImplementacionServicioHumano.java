@@ -26,6 +26,8 @@ public class ImplementacionServicioHumano extends ImplementacionServicioBase <Hu
 
     @Override
     public boolean mutanteOno(Humano humano) {
+        boolean esMutante = humano.esMutante(humano.getDna());
+        System.out.println("Es mutante: " + esMutante);
         return humano.esMutante(humano.getDna());
     }
 
@@ -34,8 +36,8 @@ public class ImplementacionServicioHumano extends ImplementacionServicioBase <Hu
         long cantidadHumanos = repositorioEstadistica.contarHumanos();
         long cantidadMutantes = repositorioEstadistica.contarMutantes();
 
-        double ratio = (cantidadHumanos + cantidadMutantes) > 0
-                ? (double) cantidadMutantes / (cantidadHumanos + cantidadMutantes)
+        double ratio = (cantidadHumanos) > 0
+                ? (double) cantidadMutantes / cantidadHumanos
                 : 0;
 
         Estadistica estadistica = Estadistica.builder()

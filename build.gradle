@@ -35,29 +35,30 @@ dependencies {
     //H2 DATABASE
     runtimeOnly 'com.h2database:h2'
 
-
-
     //MAPSTRUCT, es para mapear dto, ME PERMITE PASAR DE DTO A ENTIDAD Y VICEVERSA
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-
-    annotationProcessor 'org.projectlombok:lombok', 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
     //OPEN API, documenta api
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
 
+    //JUnit 5
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+
+    //Mockito
+    testImplementation 'org.mockito:mockito-core:3.7.7'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-
 tasks.jar {
     enabled = true
 }
 
-//compila el programa y crea una version ejecutable, envevemos nuestro sistema con un tomcat
+//compila el programa y crea una version ejecutable, envesemos nuestro sistema con un tomcat
 bootJar {
     enabled = true
 }
