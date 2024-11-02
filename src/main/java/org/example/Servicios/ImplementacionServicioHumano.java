@@ -37,6 +37,7 @@ public class ImplementacionServicioHumano extends ImplementacionServicioBase <Hu
         double ratio = (cantidadHumanos + cantidadMutantes) > 0
                 ? (double) cantidadMutantes / (cantidadHumanos + cantidadMutantes)
                 : 0;
+
         Estadistica estadistica = Estadistica.builder()
                 .fechaEstadistica(new Date())//asigna la fecha actual
                 .cantidadHumanos(cantidadHumanos)

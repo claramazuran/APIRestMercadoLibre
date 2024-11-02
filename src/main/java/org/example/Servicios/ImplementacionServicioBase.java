@@ -62,19 +62,6 @@ public abstract class ImplementacionServicioBase <E extends EntidadBase, ID exte
 
     @Override
     @Transactional
-    public E save(E entity) throws Exception {
-
-        try{
-            entity = repoBase.save(entity);
-            return entity;
-        }
-        catch(Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    @Transactional
     public E update(ID id, E entity) throws Exception {
         try{
             Optional<E> entityOptional = repoBase.findById(id);//buscamos a la persona
