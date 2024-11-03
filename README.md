@@ -25,9 +25,9 @@ Este proyecto es una aplicación Spring Boot que permite detectar si un humano e
 
    La aplicación estará disponible en http://localhost:8080.
 
-**##Uso**
-  **##Endpoints de la API**
-  POST /mutantes
+##Uso
+  ##Endpoints de la API
+     ##POST /mutantes
 
       Descripción: Verifica si la secuencia de ADN enviada pertenece a un mutante.
       Cuerpo de la solicitud:
@@ -38,7 +38,8 @@ Este proyecto es una aplicación Spring Boot que permite detectar si un humano e
       Respuestas:
       200 OK: Si el humano es mutante.
       403 Forbidden: Si el humano no es mutante.
-  GET /stats
+      
+   ##GET /stats
 
     Descripción: Devuelve estadísticas sobre el número de humanos y mutantes.
     Respuesta:
@@ -48,22 +49,22 @@ Este proyecto es una aplicación Spring Boot que permite detectar si un humano e
       "cantidadMutantes": 5,
       "ratio": 0.5
       
-  GET /mutantes
+  ##GET /mutantes
   
     Descripción: Obtiene todas las secuencias de ADN almacenadas.
     Respuesta: Lista de todas las entidades Humano.
     
-  GET /mutantes/{id}
+  ##GET /mutantes/{id}
 
     Descripción: Obtiene una secuencia de ADN específica por ID.
     Respuesta: Detalles de la entidad Humano correspondiente al ID proporcionado.
     
-  DELETE /mutantes/{id}
+  ##DELETE /mutantes/{id}
 
     Descripción: Elimina una secuencia de ADN específica por ID.
     Respuesta: 204 No Content si la eliminación fue exitosa; 400 Bad Request si ocurrió un error.
 
-  PUT /mutantes/{id}
+  ##PUT /mutantes/{id}
 
     Descripción: Actualiza una secuencia de ADN específica por ID. Verifica si el humano es mutante antes de realizar la actualización.
     Cuerpo de la solicitud:
