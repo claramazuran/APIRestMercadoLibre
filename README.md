@@ -25,7 +25,7 @@ Este proyecto es una aplicación Spring Boot que permite detectar si un humano e
 
 La aplicación está alojada en **Render**, donde se puede acceder a la API. Puedes encontrar la aplicación en el siguiente enlace:
 
-[Acceder a la aplicación en Render]([https://tu-url-de-render](https://apirestmercadolibre-1.onrender.com)
+[Acceder a la aplicación en Render](https://apirestmercadolibre-1.onrender.com)
 
 Ademas para acceder a la base de datos se debe colocar el siguiente link (https://apirestmercadolibre-1.onrender.com/h2-console/)
 
