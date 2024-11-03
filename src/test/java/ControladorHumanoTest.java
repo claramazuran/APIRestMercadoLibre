@@ -10,7 +10,7 @@ import org.example.Servicios.ImplementacionServicioHumano;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.ap.internal.util.Collections;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -29,6 +29,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -71,8 +72,8 @@ public class ControladorHumanoTest {
         humano.setDna(dna);
         humano.setEsMutante(true);
 
-        // Mockea el comportamiento del servicioHumano
-        //when(servicioHumanoHumano.mutanteOno(humano)).thenReturn(true);
+        // Mockea el comportamiento del servicioHumanoHumano
+        //when(servicioHumanoHumanoHumano.mutanteOno(humano)).thenReturn(true);
         when(ControladorHumanoTest.this.servicioHumano.save(any(Humano.class))).thenReturn(humano);
 
         // Realiza la llamada al controlador usando MockMvc
@@ -83,7 +84,7 @@ public class ControladorHumanoTest {
 
         System.out.println("Código de estado: " + resultado.getResponse().getStatus());
 
-        // Verifica que los métodos del servicioHumano fueron llamados
+        // Verifica que los métodos del servicioHumanoHumano fueron llamados
         verify(ControladorHumanoTest.this.servicioHumano, times(1)).mutanteOno(any(Humano.class));
         verify(ControladorHumanoTest.this.servicioHumano, times(1)).save(any(Humano.class));
     }
@@ -126,20 +127,87 @@ public class ControladorHumanoTest {
     }
 
     @Test
-    public void testGetAll() throws Exception {
-        when(ControladorHumanoTest.this.servicioHumano.findAll()).thenReturn(Collections.singletonList(new EntidadBase()));
+    public void testUpdateMutante() throws Exception {
+        // Crea un objeto Humano de prueba
+        Humano humano = Humano.builder()
+                .id(1L)
+                .dna(Arrays.asList("AAAAGTG",
+                        "CAGTGCC",
+                        "TGATATG",
+                        "GAATTGC",
+                        "CCCTTCG",
+                        "TGACTTG",
+                        "CACTACG"))
+                .esMutante(true)
+                .build();
 
-        mockMvc.perform(get("/entidades")
+        // Mockea el comportamiento del servicio
+        when(servicioHumano.mutanteOno(any(Humano.class))).thenReturn(true);
+        when(servicioHumano.update(any(Long.class), any(Humano.class))).thenReturn(humano);
+
+        // Realiza la llamada al controlador usando MockMvc
+        mockMvc.perform(put("/mutants/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(humano)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.esMutante").value(true));
+
+        // Verifica que los métodos del servicio fueron llamados
+        verify(servicioHumano, times(1)).mutanteOno(any(Humano.class));
+        verify(servicioHumano, times(1)).update(any(Long.class), any(Humano.class));
+    }
+
+    @Test
+    public void testUpdateNoMutante() throws Exception {
+        // Crea un objeto Humano de prueba
+        Humano humano = Humano.builder()
+                .id(1L)
+                .dna(Arrays.asList("AAAAGTG",
+                        "CAGTGCC",
+                        "TGATATG",
+                        "GAACTGC",
+                        "CCCTTCG",
+                        "TGACTTG",
+                        "CACTACG"))
+                .esMutante(false)
+                .build();
+
+        // Mockea el comportamiento del servicio
+        when(servicioHumano.mutanteOno(any(Humano.class))).thenReturn(false);
+        when(servicioHumano.update(any(Long.class), any(Humano.class))).thenReturn(humano);
+
+        // Realiza la llamada al controlador usando MockMvc
+        mockMvc.perform(put("/mutants/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(humano)))
+                .andExpect(status().isForbidden())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.esMutante").value(false));
+
+        // Verifica que los métodos del servicio fueron llamados
+        verify(servicioHumano, times(1)).mutanteOno(any(Humano.class));
+        verify(servicioHumano, times(1)).update(any(Long.class), any(Humano.class));
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+        when(ControladorHumanoTest.this.servicioHumano.findAll()).thenReturn(Collections.singletonList(new Humano()));
+
+        mockMvc.perform(get("/mutants")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testGetOne() throws Exception {
-        EntidadBase entidad = new EntidadBase();
-        when(ControladorHumanoTest.this.servicioHumano.findById(any(Long.class))).thenReturn(entidad);
+        Humano humano = new Humano();
+        humano.setId(1L);
+        when(ControladorHumanoTest.this.servicioHumano.findById(any(Long.class))).thenReturn(humano);
 
-        mockMvc.perform(get("/entidades/1")
+        mockMvc.perform(get("/mutants/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -148,7 +216,7 @@ public class ControladorHumanoTest {
     public void testGetOneNotFound() throws Exception {
         when(ControladorHumanoTest.this.servicioHumano.findById(any(Long.class))).thenThrow(new RuntimeException("No encontrado"));
 
-        mockMvc.perform(get("/entidades/1")
+        mockMvc.perform(get("/mutants/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string("{\"error\":\"No encontrado\"}"));
@@ -158,7 +226,7 @@ public class ControladorHumanoTest {
     public void testDelete() throws Exception {
         when(ControladorHumanoTest.this.servicioHumano.delete(any(Long.class))).thenReturn(true);
 
-        mockMvc.perform(delete("/entidades/1")
+        mockMvc.perform(delete("/mutants/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -167,31 +235,9 @@ public class ControladorHumanoTest {
     public void testDeleteBadRequest() throws Exception {
         when(ControladorHumanoTest.this.servicioHumano.delete(any(Long.class))).thenThrow(new RuntimeException("Error al eliminar"));
 
-        mockMvc.perform(delete("/entidades/1")
+        mockMvc.perform(delete("/mutants/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("{\"error\":\"Error al eliminar\"}"));
-    }
-
-    @Test
-    public void testSave() throws Exception {
-        EntidadBase entidad = new EntidadBase(); // Asegúrate de inicializar tu entidad correctamente
-        when(ControladorHumanoTest.this.servicioHumano.save(any(EntidadBase.class))).thenReturn(entidad);
-
-        mockMvc.perform(post("/entidades")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"campo\":\"valor\"}")) // Asegúrate de que esto coincida con la estructura JSON de tu entidad
-                .andExpect(status().isCreated());
-    }
-
-    @Test
-    public void testUpdate() throws Exception {
-        EntidadBase entidad = new EntidadBase(); // Asegúrate de inicializar tu entidad correctamente
-        when(ControladorHumanoTest.this.servicioHumano.update(any(Long.class), any(EntidadBase.class))).thenReturn(entidad);
-
-        mockMvc.perform(put("/entidades/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"campo\":\"nuevo valor\"}")) // Asegúrate de que esto coincida con la estructura JSON de tu entidad
-                .andExpect(status().isOk());
     }
 }
