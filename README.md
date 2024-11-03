@@ -11,17 +11,38 @@ Este proyecto es una aplicación Spring Boot que permite detectar si un humano e
 - **Servicios**: Clases que implementan la lógica de negocio y operaciones sobre las entidades.
 - **Controladores**: Clases que manejan las solicitudes HTTP y responden con datos.
 
+## Tecnologías Utilizadas
+
+- **Spring Boot**: Para la construcción de la API REST.
+- **JPA/Hibernate**: Para la gestión de la base de datos.
+- **H2**: Como base de datos en memoria para pruebas y desarrollo.
+- **Lombok**: Para la reducción del código boilerplate.
+- **JUnit**: Para pruebas unitarias.
+- **JaCoCo**: Para la cobertura de código.
+- **JMeter**: Para realizar pruebas de carga y rendimiento.
+
+## Cloud Computing
+
+La aplicación está alojada en **Render**, donde se puede acceder a la API. Puedes encontrar la aplicación en el siguiente enlace:
+
+[Acceder a la aplicación en Render]([https://tu-url-de-render](https://apirestmercadolibre-1.onrender.com)
+
+Ademas para acceder a la base de datos se debe colocar el siguiente link (https://apirestmercadolibre-1.onrender.com/h2-console/)
+
+## Pruebas
+
+Se han realizado pruebas exhaustivas en la aplicación, incluyendo:
+
+- **Pruebas Unitarias**: Usando JUnit para verificar la lógica de negocio y el comportamiento de los servicios.
+- **Pruebas de Carga**: Usando JMeter para evaluar el rendimiento de la API bajo diferentes condiciones de carga.
+
 ## Instalación
 
-1. Clona el repositorio:
+Para instalar y ejecutar el proyecto localmente, sigue estos pasos:
 
-   ```bash
-   git clone https://github.com/tu-usuario/nombre-del-repositorio.git
-   cd nombre-del-repositorio
-2. Compila el proyecto con el comando
-   gradlew build
-3. Ejecuta la aplicacion con el siguente comando
-   gradlew bootRun
+1. Clona este repositorio.
+2. Navega al directorio del proyecto.
+3. Ejecuta `./gradlew bootRun` para iniciar la aplicación.
 
    La aplicación estará disponible en http://localhost:8080.
 
