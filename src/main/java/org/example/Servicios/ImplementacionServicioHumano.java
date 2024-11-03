@@ -13,10 +13,16 @@ import java.util.List;
 
 @Service
 public class ImplementacionServicioHumano extends ImplementacionServicioBase <Humano, Long> implements ServicioHumano{
+
     @Autowired
     private RepositorioHumano repositorioHumano;
     @Autowired
     private RepositorioEstadistica repositorioEstadistica;
+
+    @Autowired
+    public ImplementacionServicioHumano(RepositorioEstadistica repositorioEstadistica) {
+        this.repositorioEstadistica = repositorioEstadistica;
+    }
 
     @Override
     public Humano save(Humano entity) {
@@ -26,8 +32,6 @@ public class ImplementacionServicioHumano extends ImplementacionServicioBase <Hu
 
     @Override
     public boolean mutanteOno(Humano humano) {
-        boolean esMutante = humano.esMutante(humano.getDna());
-        System.out.println("Es mutante: " + esMutante);
         return humano.esMutante(humano.getDna());
     }
 

@@ -43,7 +43,6 @@ public class ImplementacionServicioHumanoTest {
     }
 
     @Test
-
     public void testObtenerEstadistica() {
         // Configura el comportamiento del mock
         when(repositorioEstadistica.contarHumanos()).thenReturn(100L);
